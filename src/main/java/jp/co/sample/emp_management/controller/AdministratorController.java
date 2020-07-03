@@ -41,7 +41,11 @@ public class AdministratorController {
 		return new InsertAdministratorForm();
 	}
 	
-	//  (SpringSecurityに任せるためコメントアウトしました)
+	/**
+	 * 使用するフォームオブジェクトをリクエストスコープに格納する.
+	 * 
+	 * @return フォーム
+	 */
 	@ModelAttribute
 	public LoginForm setUpLoginForm() {
 		return new LoginForm();

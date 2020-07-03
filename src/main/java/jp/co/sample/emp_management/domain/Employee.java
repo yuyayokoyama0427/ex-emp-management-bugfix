@@ -85,98 +85,170 @@ public class Employee {
 		this.dependentsCount = dependentsCount;
 	}
 
+	/**
+	 * @return the id
+	 */
 	public Integer getId() {
 		return id;
 	}
 
+	/**
+	 * @param id the id to set
+	 */
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
+	/**
+	 * @return the name
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * @param name the name to set
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	/**
+	 * @return the image
+	 */
 	public String getImage() {
 		return image;
 	}
 
+	/**
+	 * @param image the image to set
+	 */
 	public void setImage(String image) {
 		this.image = image;
 	}
 
+	/**
+	 * @return the gender
+	 */
 	public String getGender() {
 		return gender;
 	}
 
+	/**
+	 * @param gender the gender to set
+	 */
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
 
+	/**
+	 * @return the hireDate
+	 */
 	public Date getHireDate() {
 		return hireDate;
 	}
 
+	/**
+	 * @param hireDate the hireDate to set
+	 */
 	public void setHireDate(Date hireDate) {
 		this.hireDate = hireDate;
 	}
 
+	/**
+	 * @return the mailAddress
+	 */
 	public String getMailAddress() {
 		return mailAddress;
 	}
 
+	/**
+	 * @param mailAddress the mailAddress to set
+	 */
 	public void setMailAddress(String mailAddress) {
 		this.mailAddress = mailAddress;
 	}
 
+	/**
+	 * @return the zipCode
+	 */
 	public String getZipCode() {
 		return zipCode;
 	}
 
+	/**
+	 * @param zipCode the zipCode to set
+	 */
 	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
 	}
 
+	/**
+	 * @return the address
+	 */
 	public String getAddress() {
 		return address;
 	}
 
+	/**
+	 * @param address the address to set
+	 */
 	public void setAddress(String address) {
 		this.address = address;
 	}
 
+	/**
+	 * @return the telephone
+	 */
 	public String getTelephone() {
 		return telephone;
 	}
 
+	/**
+	 * @param telephone the telephone to set
+	 */
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
 
+	/**
+	 * @return the salary
+	 */
 	public Integer getSalary() {
 		return salary;
 	}
 
+	/**
+	 * @param salary the salary to set
+	 */
 	public void setSalary(Integer salary) {
 		this.salary = salary;
 	}
 
+	/**
+	 * @return the characteristics
+	 */
 	public String getCharacteristics() {
 		return characteristics;
 	}
 
+	/**
+	 * @param characteristics the characteristics to set
+	 */
 	public void setCharacteristics(String characteristics) {
 		this.characteristics = characteristics;
 	}
 
+	/**
+	 * @return the dependentsCount
+	 */
 	public Integer getDependentsCount() {
 		return dependentsCount;
 	}
 
+	/**
+	 * @param dependentsCount the dependentsCount to set
+	 */
 	public void setDependentsCount(Integer dependentsCount) {
 		this.dependentsCount = dependentsCount;
 	}
@@ -188,5 +260,5 @@ public class Employee {
 				+ ", telephone=" + telephone + ", salary=" + salary + ", characteristics=" + characteristics
 				+ ", dependentsCount=" + dependentsCount + "]";
 	}
-
+	
 }

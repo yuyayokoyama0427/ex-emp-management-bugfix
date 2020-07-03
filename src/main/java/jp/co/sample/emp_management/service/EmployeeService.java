@@ -37,7 +37,7 @@ public class EmployeeService {
 	 * 
 	 * @param id ID
 	 * @return 従業員情報
-	 * @throws 検索されない場合は例外が発生します
+	 * @throws org.springframework.dao.DataAccessException 検索されない場合は例外が発生します
 	 */
 	public Employee showDetail(Integer id) {
 		Employee employee = employeeRepository.load(id);
@@ -47,7 +47,7 @@ public class EmployeeService {
 	/**
 	 * 従業員情報を更新します.
 	 * 
-	 * @param employee　更新した従業員情報
+	 * @param employee 更新した従業員情報
 	 */
 	public void update(Employee employee) {
 		employeeRepository.update(employee);
