@@ -1,6 +1,5 @@
 package jp.co.sample.emp_management.controller;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,9 +68,6 @@ public class EmployeeController {
 	public String showDetail(String id, Model model) {
 		Employee employee = employeeService.showDetail(Integer.parseInt(id));
 		model.addAttribute("employee", employee);
-		
-		LocalDate localDate = LocalDate.now();
-		model.addAttribute("localDate", localDate);
 		
 		return "employee/detail";
 	}
