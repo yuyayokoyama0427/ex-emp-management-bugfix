@@ -90,7 +90,7 @@ public class AdministratorController {
 			administratorService.insert(administrator);
 		}
 		
-		return "administrator/login";
+		return "redirect:/administrator/login";
 	}
 	/**
 	 * メールアドレスの重複チェック.
