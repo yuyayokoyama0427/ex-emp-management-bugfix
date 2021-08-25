@@ -17,6 +17,7 @@ public class InsertAdministratorForm {
 	private String name;
 	/** メールアドレス */
 	@Email(message="メールアドレスの形式が不正です。")
+	@NotBlank(message = "メールアドレスは必須です！")
 	private String mailAddress;
 	/** パスワード */
 	@Size(min=1, max=127, message="パスワードは必須です！1~127文字以内で記載して下さい。")
