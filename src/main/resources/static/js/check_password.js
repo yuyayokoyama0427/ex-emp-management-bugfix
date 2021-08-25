@@ -1,5 +1,9 @@
 /**
+<<<<<<< HEAD
  * 確認用パスワード
+=======
+ * パスワード非同期チェック
+>>>>>>> feature/intermediate
  */
 
 'use strict';
@@ -13,7 +17,8 @@ $(function() {
 	});
 
 	function check_password() {
-		let hostUrl = 'http://localhost:8080/insert';
+
+		let hostUrl = 'http://localhost:8080/toInsert';
 		let inputPassword = $('#password').val();
 		let inputConfirmationPassword = $('#confirmationPassword').val();
 		$.ajax({
