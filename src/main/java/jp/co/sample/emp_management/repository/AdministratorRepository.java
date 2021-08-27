@@ -43,6 +43,7 @@ public class AdministratorRepository {
 	 * @return 管理者情報 
 	 * @throws org.springframework.dao.DataAccessException 存在しない場合は例外を発生します
 	 */
+	
 	public Administrator load(Integer id) {
 		String sql = "select id,name,mail_address,password from administrators where id=:id";
 		SqlParameterSource param = new MapSqlParameterSource().addValue("id", id);
