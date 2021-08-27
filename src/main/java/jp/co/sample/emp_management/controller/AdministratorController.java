@@ -96,48 +96,6 @@ public class AdministratorController {
 		
 		return "administrator/login";
 	}
-//	/**
-//	 * メールアドレスの重複チェック.
-//	 * @param email メールアドレス
-//	 * @return メッセージの詰まったマップ
-//	 */
-//	@ResponseBody
-//	@RequestMapping(value = "/check", method = RequestMethod.POST)
-//	public Map<String, String> check(String email){
-//		Map<String, String> map = new HashMap<>();
-//		String duplicateMessage = null;
-//		if ("iga@sample.com".equals(email)) {
-//			duplicateMessage =  "「" + email + "」は既に登録されているメールアドレスです";
-//		} else {
-//			duplicateMessage =  "「" + email + "」は登録されていません";
-//		}
-//		map.put("duplicateMessage", duplicateMessage);
-//		return map;
-//	};
-	
-//	/**
-//	 * パスワードのチェック.
-//	 * @param password パスワード
-//	 * @param confirmationPassword 一致してないメッセージ
-//	 * @return メッセージの詰まったマップ
-//	 */
-//	@ResponseBody
-//	@RequestMapping(value = "/check", method = RequestMethod.POST)
-//	public Map<String, String> check(String password, String confirmationPassword) {
-//		Map<String, String> map = new HashMap<>();
-//
-//		// パスワード一致チェック
-//		String disagreementMessage = null;
-//		if (password.equals(confirmationPassword)) {
-//			disagreementMessage = "確認用パスワード入力OK!";
-//		} else {
-//			disagreementMessage = "パスワードが一致していません";
-//		}
-//		map.put("disagreementMessage", disagreementMessage);
-////		System.out.println(password + ":" + confirmationPassword);
-//		
-//		return map;
-//	}
 
 	/////////////////////////////////////////////////////
 	// ユースケース：ログインをする
