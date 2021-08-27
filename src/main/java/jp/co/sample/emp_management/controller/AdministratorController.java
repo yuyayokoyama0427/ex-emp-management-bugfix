@@ -1,7 +1,5 @@
 package jp.co.sample.emp_management.controller;
 
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -12,8 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import jp.co.sample.emp_management.domain.Administrator;
 import jp.co.sample.emp_management.form.InsertAdministratorForm;
@@ -90,51 +86,12 @@ public class AdministratorController {
 			administratorService.insert(administrator);
 		}
 		
-		return "redirect:/administrator/login";
+		return "redirect:/";
 	}
-	/**
-	 * メールアドレスの重複チェック.
-	 * @param email メールアドレス
-	 * @return メッセージの詰まったマップ
-	 */
-	@ResponseBody
-	@RequestMapping(value = "/check", method = RequestMethod.POST)
-	public Map<String, String> check(String email){
-		Map<String, String> map = new HashMap<>();
-		String duplicateMessage = null;
-		if ("iga@sample.com".equals(email)) {
-			duplicateMessage =  "「" + email + "」は既に登録されているメールアドレスです";
-		} else {
-			duplicateMessage =  "「" + email + "」は登録されていません";
-		}
-		map.put("duplicateMessage", duplicateMessage);
-		return map;
-	};
 	
 	
-	/**
-	 * パスワードのチェック.
-	 * @param password パスワード
-	 * @param confirmationPassword 一致してないメッセージ
-	 * @return メッセージの詰まったマップ
-	 */
-	@ResponseBody
-	@RequestMapping(value = "/check", method = RequestMethod.POST)
-	public Map<String, String> check(String password, String confirmationPassword) {
-		Map<String, String> map = new HashMap<>();
-
-		// パスワード一致チェック
-		String disagreementMessage = null;
-		if (password.equals(confirmationPassword)) {
-			disagreementMessage = "確認用パスワード入力OK!";
-		} else {
-			disagreementMessage = "パスワードが一致していません";
-		}
-		map.put("disagreementMessage", disagreementMessage);
-//		System.out.println(password + ":" + confirmationPassword);
-		
-		return map;
-	}
+	
+	
 
 	/////////////////////////////////////////////////////
 	// ユースケース：ログインをする
