@@ -11,7 +11,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import jp.co.sample.emp_management.domain.Administrator;
 import jp.co.sample.emp_management.form.InsertAdministratorForm;
 import jp.co.sample.emp_management.form.LoginForm;
@@ -76,17 +75,16 @@ public class AdministratorController {
 	
 	@RequestMapping("/insert")
 	public String insert(@Validated InsertAdministratorForm form
-						,BindingResult result
-						,RedirectAttributes redirectAttributes
-						,Model model) {
-		if(result.hasErrors()) {
-			return toInsert();
+						,BindingResult result) {
+		if(!form.getPassword().equals(form.getConfirmationPassword())){
+			result.rejectValue("password", "", "パスワードが一致していません");
+			result.rejectValue("confirmationPassword", "", "");
 		}
 		
 		
-//		if(form.getMailAddress().equals("mailAddress")){
-//			return "/insert";	//登録されているものだったらインサートに戻す
-//		} else {
+		if(result.hasErrors()) {
+			return toInsert();
+		}
 			
 			Administrator administrator = new Administrator();
 			// フォームからドメインにプロパティ値をコピー
