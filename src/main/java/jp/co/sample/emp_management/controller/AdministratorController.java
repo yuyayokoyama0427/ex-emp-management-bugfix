@@ -1,7 +1,5 @@
 package jp.co.sample.emp_management.controller;
 
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -10,10 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import jp.co.sample.emp_management.domain.Administrator;
 import jp.co.sample.emp_management.form.InsertAdministratorForm;
@@ -78,62 +75,25 @@ public class AdministratorController {
 	 */
 	
 	@RequestMapping("/insert")
-	public String insert(InsertAdministratorForm form) {
+	public String insert(@Validated InsertAdministratorForm form, BindingResult result, Model model, String mailAddress, String confirmPass) {
 		
-		if(form.getMailAddress().equals("mailAddress")){
-			return "/insert";	//登録されているものだったらインサートに戻す
-		} else {
+		Administrator emailCheck = administratorService.findByMailAddress(form.getMailAddress());
+		// アドレスが既にトプ録されている場合
+		if (!(emailCheck == null)) {
+			model.addAttribute("mailError", "このメールアドレスは既に登録されています。");
+			return toInsert();
 			
+		} else if(form.getPassword().equals(confirmPass)) {
+			// アドレスとパスワードがあっている場合
 			Administrator administrator = new Administrator();
 			// フォームからドメインにプロパティ値をコピー
 			BeanUtils.copyProperties(form, administrator);
 			administratorService.insert(administrator);
+			return "administrator/login";
 		}
 		
-		return "administrator/login";
-	}
-	/**
-	 * メールアドレスの重複チェック.
-	 * @param email メールアドレス
-	 * @return メッセージの詰まったマップ
-	 */
-	@ResponseBody
-	@RequestMapping(value = "/check", method = RequestMethod.POST)
-	public Map<String, String> check(String email){
-		Map<String, String> map = new HashMap<>();
-		String duplicateMessage = null;
-		if ("iga@sample.com".equals(email)) {
-			duplicateMessage =  "「" + email + "」は既に登録されているメールアドレスです";
-		} else {
-			duplicateMessage =  "「" + email + "」は登録されていません";
-		}
-		map.put("duplicateMessage", duplicateMessage);
-		return map;
-	};
-	
-	
-	/**
-	 * パスワードのチェック.
-	 * @param password パスワード
-	 * @param confirmationPassword 一致してないメッセージ
-	 * @return メッセージの詰まったマップ
-	 */
-	@ResponseBody
-	@RequestMapping(value = "/check", method = RequestMethod.POST)
-	public Map<String, String> check(String password, String confirmationPassword) {
-		Map<String, String> map = new HashMap<>();
-
-		// パスワード一致チェック
-		String disagreementMessage = null;
-		if (password.equals(confirmationPassword)) {
-			disagreementMessage = "確認用パスワード入力OK!";
-		} else {
-			disagreementMessage = "パスワードが一致していません";
-		}
-		map.put("disagreementMessage", disagreementMessage);
-//		System.out.println(password + ":" + confirmationPassword);
-		
-		return map;
+		// パスワードと確認用パスワードが一致しません。
+		return toInsert();
 	}
 
 	/////////////////////////////////////////////////////
