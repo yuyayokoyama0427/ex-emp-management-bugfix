@@ -46,6 +46,7 @@
 										</label>
 										<input type="text" name="name" id="name" class="form-control" placeholder="山田太郎"
 											 th:field="*{name}" th:errorclass="error-input" value="山田太郎">
+										<div th:error="*{name}" style="color:red"></div>
 									</div>
 								</div>
 							</div>
@@ -61,6 +62,7 @@
 										</label>
 										<input type="text" name="mailAddress" id="mailAddress" class="form-control" placeholder="yamada@mail.com"
 											 th:field="*{mailAddress}" th:errorclass="error-input" value="yamada@mail.com">
+										<div th:error="*{mailAddress}" style="color:red"></div>
 									</div>
 								</div>
 							</div>
@@ -76,11 +78,12 @@
 										</label>
 										<input type="password" name="password" id="password" class="form-control" placeholder="password"
 											 th:field="*{password}" th:errorclass="error-input" value="xxxxxxxx">
+										<div th:error="*{password}" style="color:red"></div>
 									</div>
 								</div>
 							</div>
 							<!-- 確認用パスワード -->
-							<div class="form-group">
+					<!-- 		<div class="form-group">
 								<div class="row">
 									<div class="col-sm-12">
 										<label for="confirmpass">
@@ -91,7 +94,7 @@
 									
 									</div>
 								</div>
-							</div>
+							</div> -->
 							
 							<!-- 登録ボタン -->
 							<div class="form-group">
