@@ -82,18 +82,19 @@ public class AdministratorController {
 		if (!(emailCheck == null)) {
 			model.addAttribute("mailError", "このメールアドレスは既に登録されています。");
 			return toInsert();
-			
 		} else if(form.getPassword().equals(confirmPass)) {
 			// アドレスとパスワードがあっている場合
 			Administrator administrator = new Administrator();
 			// フォームからドメインにプロパティ値をコピー
 			BeanUtils.copyProperties(form, administrator);
 			administratorService.insert(administrator);
-			return "administrator/login";
+			return "redirect:/";
 		}
 		
 		// パスワードと確認用パスワードが一致しません。
 		return toInsert();
+		
+		
 	}
 
 	/////////////////////////////////////////////////////
