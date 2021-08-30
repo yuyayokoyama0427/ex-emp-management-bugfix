@@ -1,7 +1,6 @@
 package jp.co.sample.emp_management.controller;
 
 
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,7 +26,7 @@ public class AdministratorController {
 
 	@Autowired
 	private AdministratorService administratorService;
-	
+
 
 	/**
 	 * 使用するフォームオブジェクトをリクエストスコープに格納する.
@@ -38,7 +37,7 @@ public class AdministratorController {
 	public InsertAdministratorForm setUpInsertAdministratorForm() {
 		return new InsertAdministratorForm();
 	}
-	
+
 	/**
 	 * 使用するフォームオブジェクトをリクエストスコープに格納する.
 	 * 
@@ -60,40 +59,40 @@ public class AdministratorController {
 	@RequestMapping("/toInsert")
 	public String toInsert() {
 		return "administrator/insert";
-	}	
-	
+	}
+
 	/**
 	 * 管理者情報を登録します.
 	 * 
-	 * @param form
-	 *            管理者情報用フォーム
+	 * @param form 管理者情報用フォーム
 	 * @return ログイン画面へリダイレクト
 	 */
-	
-	@RequestMapping("/insert")
-	public String insert(@Validated InsertAdministratorForm form
-						,BindingResult result) {
-		if(!form.getPassword().equals(form.getConfirmationPassword())){
-			result.rejectValue("password", "", "パスワードが一致していません");
-			result.rejectValue("confirmationPassword", "", "");
-		}
 
-	
+	@RequestMapping("/insert")
+	public String insert(@Validated InsertAdministratorForm form, BindingResult result, Model model) {
 		
-		
+		Administrator emailCheck = administratorService.findByMailAddress(form.getMailAddress());
+		// アドレスが既に登録されている場合
+		if ((emailCheck != null)) {
+			result.rejectValue("mailAddress", "", "このメールアドレスは既に登録されています。");
+			
+		} 
 		if (result.hasErrors()) {
-			  return toInsert();
+			return toInsert();
+
 		}
 		
-		Administrator administrator = new Administrator();
-		// フォームからドメインにプロパティ値をコピー
-		BeanUtils.copyProperties(form, administrator);
-		
+
+			// アドレスとパスワードがあっている場合
+			Administrator administrator = new Administrator();
+			// フォームからドメインにプロパティ値をコピー
+			BeanUtils.copyProperties(form, administrator);
+			administratorService.insert(administrator);
+
 		
 		administratorService.insert(administrator);
 		return "redirect:/";
 	}
-
 
 	/////////////////////////////////////////////////////
 	// ユースケース：ログインをする
@@ -111,10 +110,8 @@ public class AdministratorController {
 	/**
 	 * ログインします.
 	 * 
-	 * @param form
-	 *            管理者情報用フォーム
-	 * @param result
-	 *            エラー情報格納用オブッジェクト
+	 * @param form   管理者情報用フォーム
+	 * @param result エラー情報格納用オブッジェクト
 	 * @return ログイン後の従業員一覧画面
 	 */
 	@RequestMapping("/login")
@@ -126,7 +123,7 @@ public class AdministratorController {
 		}
 		return "forward:/employee/showList";
 	}
-	
+
 	/////////////////////////////////////////////////////
 	// ユースケース：ログアウトをする
 	/////////////////////////////////////////////////////
@@ -139,5 +136,5 @@ public class AdministratorController {
 	public String logout() {
 		return "redirect:/";
 	}
-	
+
 }

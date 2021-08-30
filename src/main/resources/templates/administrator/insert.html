@@ -59,6 +59,23 @@
 							<div class="form-group">
 								<div class="row">
 									<div class="col-sm-12">
+<<<<<<< HEAD
+										<label for="mailAddress">
+											メールアドレス:
+										</label>
+										<label th:if="${#fields.hasErrors('mailAddress')}" th:errors="*{mailAddress}" class="error-messages">
+											メールアドレスを入力してください
+										</label>
+										<input type="text" name="mailAddress" id="mailAddress" class="form-control" placeholder="yamada@mail.com"
+											 th:field="*{mailAddress}" th:errorclass="error-input" value="yamada@mail.com">
+<<<<<<< HEAD
+										<div class="alert alert-danger" th:if="${mailError}">
+			                        		<p th:text="${mailError}"></p>
+			                    		</div>
+=======
+										<div th:error="*{mailAddress}" style="color:red"></div>
+>>>>>>> develop
+=======
 										<label for="mailAddress"> メールアドレス: </label> <label
 											th:if="${#fields.hasErrors('mailAddress')}"
 											th:errors="*{mailAddress}" class="error-messages">
@@ -67,6 +84,7 @@
 											placeholder="yamada@mail.com" th:field="*{mailAddress}"
 											th:errorclass="error-input" value="yamada@mail.com">
 										<div th:error="*{mailAddress}" style="color: red"></div>
+>>>>>>> develop
 									</div>
 								</div>
 							</div>
@@ -86,8 +104,17 @@
 								</div>
 							</div>
 							<!-- 確認用パスワード -->
+<<<<<<< HEAD
+						<!-- 	<div class="form-group">
+=======
 
+<<<<<<< HEAD
+						<!-- 	<div class="form-group">
+
+>>>>>>> develop
+=======
 							<div class="form-group">
+>>>>>>> develop
 								<div class="row">
 									<div class="col-sm-12">
 										<label for="passwaord"> 確認用パスワード: </label> <label
