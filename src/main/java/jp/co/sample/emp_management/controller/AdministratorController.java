@@ -73,7 +73,7 @@ public class AdministratorController {
 	 */
 
 	@RequestMapping("/insert")
-	public String insert(@Validated InsertAdministratorForm form, BindingResult result, Model model, String mailAddress, String confirmPass) {
+	public String insert(@Validated InsertAdministratorForm form, BindingResult result, Model model) {
 		
 		Administrator emailCheck = administratorService.findByMailAddress(form.getMailAddress());
 		// アドレスが既に登録されている場合
@@ -84,16 +84,13 @@ public class AdministratorController {
 		if (result.hasErrors()) {
 			return toInsert();
 		}
+		
+		
 			// アドレスとパスワードがあっている場合
 			Administrator administrator = new Administrator();
 			// フォームからドメインにプロパティ値をコピー
 			BeanUtils.copyProperties(form, administrator);
 			administratorService.insert(administrator);
-		
-		
-		// パスワードと確認用パスワードが一致しません。
-	
-		
 		
 		return "redirect:/";
 	}
