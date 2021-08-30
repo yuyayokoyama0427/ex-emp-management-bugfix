@@ -1,7 +1,6 @@
 package jp.co.sample.emp_management.controller;
 
 
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import jp.co.sample.emp_management.domain.Administrator;
 import jp.co.sample.emp_management.form.InsertAdministratorForm;
 import jp.co.sample.emp_management.form.LoginForm;
@@ -30,8 +28,6 @@ public class AdministratorController {
 	@Autowired
 	private AdministratorService administratorService;
 	
-	@Autowired
-	private HttpSession session;
 
 	/**
 	 * 使用するフォームオブジェクトをリクエストスコープに格納する.
@@ -76,23 +72,25 @@ public class AdministratorController {
 	
 	@RequestMapping("/insert")
 	public String insert(@Validated InsertAdministratorForm form
-						,BindingResult result
-						,Model model) {
-		if(result.hasErrors()) {
-			return toInsert();
+						,BindingResult result) {
+		if(!form.getPassword().equals(form.getConfirmationPassword())){
+			result.rejectValue("password", "", "パスワードが一致していません");
+			result.rejectValue("confirmationPassword", "", "");
+		}
+
+	
+		
+		
+		if (result.hasErrors()) {
+			  return toInsert();
 		}
 		
+		Administrator administrator = new Administrator();
+		// フォームからドメインにプロパティ値をコピー
+		BeanUtils.copyProperties(form, administrator);
 		
-//		if(form.getMailAddress().equals("mailAddress")){
-//			return "/insert";	//登録されているものだったらインサートに戻す
-//		} else {
-			
-			Administrator administrator = new Administrator();
-			// フォームからドメインにプロパティ値をコピー
-			BeanUtils.copyProperties(form, administrator);
-			administratorService.insert(administrator);
-//		}
 		
+		administratorService.insert(administrator);
 		return "redirect:/";
 	}
 
@@ -139,7 +137,6 @@ public class AdministratorController {
 	 */
 	@RequestMapping(value = "/logout")
 	public String logout() {
-		session.invalidate();
 		return "redirect:/";
 	}
 	
